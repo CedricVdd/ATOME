@@ -297,7 +297,66 @@ const QUESTIONS = [
   {type:"formule", theme:"Chimie - gaz", niveau:"Tle", enonce:"Écris la relation entre le volume V d'un gaz, sa quantité de matière n et le volume molaire Vm.", reponse:"V = n × Vm, avec V en L, n en mol, Vm en L/mol."},
   {type:"calcul", theme:"Chimie - gaz", niveau:"Tle", enonce:"Calcule le volume occupé par 0,25 mol de gaz, avec un volume molaire de 24 L/mol.", reponse:"V = n × Vm = 0,25 × 24 = 6 L."},
   {type:"definition", theme:"Mouvement", niveau:"Tle", enonce:"Donne la définition d'un référentiel galiléen.", reponse:"Référentiel dans lequel le principe d'inertie est vérifié : un objet non soumis à des forces (ou soumis à des forces qui se compensent) reste au repos ou en mouvement rectiligne uniforme."},
-  {type:"calcul", theme:"Mouvement", niveau:"Tle", enonce:"Une force résultante de 20 N s'applique sur un objet de masse 4 kg initialement au repos. Calcule la distance parcourue après 3 s.", reponse:"a = F/m = 20/4 = 5 m/s² ; d = ½×a×t² = 0,5×5×3² = 22,5 m."}
+  {type:"calcul", theme:"Mouvement", niveau:"Tle", enonce:"Une force résultante de 20 N s'applique sur un objet de masse 4 kg initialement au repos. Calcule la distance parcourue après 3 s.", reponse:"a = F/m = 20/4 = 5 m/s² ; d = ½×a×t² = 0,5×5×3² = 22,5 m."},
+
+    // ===== Manipulation de formules littérales =====
+  {type:"formule", theme:"Automatismes maths - Formules littérales", niveau:"2de", enonce:"Dans la relation P = m × g, exprime m en fonction de P et g.", reponse:"m = P / g."},
+  {type:"formule", theme:"Automatismes maths - Formules littérales", niveau:"2de", enonce:"Dans la relation d = v × t, exprime t en fonction de d et v.", reponse:"t = d / v."},
+  {type:"formule", theme:"Automatismes maths - Formules littérales", niveau:"1re", enonce:"Dans la relation U = R × I, exprime R en fonction de U et I.", reponse:"R = U / I."},
+  {type:"formule", theme:"Automatismes maths - Formules littérales", niveau:"1re", enonce:"Dans la relation Ec = ½ × m × v², exprime v en fonction de Ec et m.", reponse:"v = √(2×Ec / m)."},
+  {type:"formule", theme:"Automatismes maths - Formules littérales", niveau:"Tle", enonce:"Dans la relation E = m × c², exprime m en fonction de E et c.", reponse:"m = E / c²."},
+  {type:"formule", theme:"Automatismes maths - Formules littérales", niveau:"Tle", enonce:"Dans la relation 1/f' = 1/OA' − 1/OA, exprime OA en fonction de f' et OA'.", reponse:"1/OA = 1/OA' − 1/f', donc OA = 1 / (1/OA' − 1/f')."},
+ 
+  // ===== Conversion d'unités =====
+  {type:"calcul", theme:"Automatismes maths - Conversion d'unités", niveau:"2de", enonce:"Convertis 2,5 km en mètres.", reponse:"2,5 km = 2500 m."},
+  {type:"calcul", theme:"Automatismes maths - Conversion d'unités", niveau:"2de", enonce:"Convertis 350 g en kilogrammes.", reponse:"350 g = 0,350 kg."},
+  {type:"calcul", theme:"Automatismes maths - Conversion d'unités", niveau:"2de", enonce:"Convertis 45 minutes en secondes.", reponse:"45 min = 2700 s."},
+  {type:"calcul", theme:"Automatismes maths - Conversion d'unités", niveau:"2de", enonce:"Convertis 1,2 L en mL.", reponse:"1,2 L = 1200 mL."},
+  {type:"calcul", theme:"Automatismes maths - Conversion d'unités", niveau:"1re", enonce:"Convertis 72 km/h en m/s.", reponse:"72 / 3,6 = 20 m/s."},
+  {type:"calcul", theme:"Automatismes maths - Conversion d'unités", niveau:"1re", enonce:"Convertis 15 mA en A.", reponse:"15 mA = 0,015 A."},
+ 
+  // ===== Puissances de 10 / notation scientifique =====
+  {type:"calcul", theme:"Automatismes maths - Puissances de 10", niveau:"2de", enonce:"Écris 0,000045 en notation scientifique.", reponse:"0,000045 = 4,5×10⁻⁵."},
+  {type:"calcul", theme:"Automatismes maths - Puissances de 10", niveau:"2de", enonce:"Écris 32000 en notation scientifique.", reponse:"32000 = 3,2×10⁴."},
+  {type:"calcul", theme:"Automatismes maths - Puissances de 10", niveau:"1re", enonce:"Calcule (2×10³) × (3×10⁻⁵) et donne le résultat en notation scientifique.", reponse:"(2×10³) × (3×10⁻⁵) = 6×10⁻²."},
+  {type:"calcul", theme:"Automatismes maths - Puissances de 10", niveau:"1re", enonce:"Calcule (8×10⁶) / (2×10²) et donne le résultat en notation scientifique.", reponse:"(8×10⁶) / (2×10²) = 4×10⁴."},
+  {type:"calcul", theme:"Automatismes maths - Puissances de 10", niveau:"Tle", enonce:"Simplifie (5×10⁻³)² et donne le résultat en notation scientifique.", reponse:"(5×10⁻³)² = 25×10⁻⁶ = 2,5×10⁻⁵."},
+ 
+  // ===== Calcul numérique à la calculatrice =====
+  {type:"calcul", theme:"Automatismes maths - Calcul à la calculatrice", niveau:"2de", enonce:"Donne l'ordre de grandeur de 8,9×10⁵.", reponse:"8,9 est proche de 10, donc l'ordre de grandeur est 10⁶."},
+  {type:"calcul", theme:"Automatismes maths - Calcul à la calculatrice", niveau:"2de", enonce:"Arrondis 12,678 à deux chiffres significatifs.", reponse:"12,678 arrondi à 2 chiffres significatifs donne 13."},
+  {type:"calcul", theme:"Automatismes maths - Calcul à la calculatrice", niveau:"1re", enonce:"Calcule 3,6 × 7,2 à la calculatrice, puis exprime le résultat avec 2 chiffres significatifs.", reponse:"3,6 × 7,2 = 25,92, soit 26 avec 2 chiffres significatifs."},
+  {type:"calcul", theme:"Automatismes maths - Calcul à la calculatrice", niveau:"1re", enonce:"Calcule (4,2×10⁵) × (1,5×10⁻²) à la calculatrice.", reponse:"(4,2×10⁵) × (1,5×10⁻²) = 6,3×10³."},
+  {type:"calcul", theme:"Automatismes maths - Calcul à la calculatrice", niveau:"Tle", enonce:"Calcule (3,00×10⁸) / (6,58×10¹⁴) à la calculatrice, en notation scientifique.", reponse:"(3,00×10⁸) / (6,58×10¹⁴) ≈ 4,56×10⁻⁷."},
+ 
+  // ===== Calculs vectoriels =====
+  {type:"calcul", theme:"Automatismes maths - Calculs vectoriels", niveau:"1re", enonce:"Un vecteur a pour coordonnées (3 ; 4). Calcule sa norme.", reponse:"||v|| = √(3² + 4²) = √25 = 5."},
+  {type:"calcul", theme:"Automatismes maths - Calculs vectoriels", niveau:"1re", enonce:"Deux vecteurs ont pour coordonnées u(2 ; 1) et v(−1 ; 3). Calcule les coordonnées du vecteur somme u + v.", reponse:"u + v = (2+(−1) ; 1+3) = (1 ; 4)."},
+  {type:"calcul", theme:"Automatismes maths - Calculs vectoriels", niveau:"Tle", enonce:"Un vecteur vitesse a pour coordonnées (6 ; −8) en m/s. Calcule sa norme (la valeur de la vitesse).", reponse:"||v|| = √(6² + 8²) = √100 = 10 m/s."},
+  {type:"calcul", theme:"Automatismes maths - Calculs vectoriels", niveau:"Tle", enonce:"Un vecteur force F a une norme de 10 N et fait un angle de 30° avec l'horizontale. Calcule sa composante horizontale Fx.", reponse:"Fx = F × cos(30°) = 10 × 0,866 ≈ 8,66 N."},
+  {type:"calcul", theme:"Automatismes maths - Calculs vectoriels", niveau:"Tle", enonce:"Un vecteur force F a une norme de 10 N et fait un angle de 30° avec l'horizontale. Calcule sa composante verticale Fy.", reponse:"Fy = F × sin(30°) = 10 × 0,5 = 5 N."},
+ 
+  // ===== Lecture / tracé de graphiques =====
+  {type:"calcul", theme:"Automatismes maths - Graphiques", niveau:"1re", enonce:"Une droite passe par les points A(0 ; 2) et B(4 ; 10). Calcule son coefficient directeur.", reponse:"a = (10 − 2) / (4 − 0) = 8 / 4 = 2."},
+  {type:"calcul", theme:"Automatismes maths - Graphiques", niveau:"1re", enonce:"Une droite a pour coefficient directeur 3 et passe par le point (0 ; 1). Donne son équation réduite.", reponse:"y = 3x + 1."},
+  {type:"calcul", theme:"Automatismes maths - Graphiques", niveau:"Tle", enonce:"Trace l'allure de la fonction f(x) = x² sur l'intervalle [−3 ; 3], en plaçant au moins 5 points.", reponse:"Une parabole symétrique par rapport à l'axe des ordonnées, passant par (0 ; 0), décroissante pour x<0 et croissante pour x>0, avec un minimum en x=0."},
+  {type:"calcul", theme:"Automatismes maths - Graphiques", niveau:"Tle", enonce:"Sur un graphique représentant la position x(t) d'un mobile, la tangente à la courbe au point t=2 s a un coefficient directeur de 4. Que représente cette valeur physiquement ?", reponse:"Ce coefficient directeur représente la vitesse instantanée du mobile à t=2 s (dx/dt), ici égale à 4 dans l'unité correspondante (ex : m/s)."},
+  {type:"calcul", theme:"Automatismes maths - Graphiques", niveau:"Tle", enonce:"Trace l'allure de la fonction f(t) = e^(−t) pour t ≥ 0, en indiquant sa valeur en t=0 et son comportement quand t tend vers l'infini.", reponse:"La courbe part de f(0) = 1, est strictement décroissante, et tend vers 0 sans jamais l'atteindre quand t tend vers l'infini."},
+ 
+  // ===== Calcul de dérivée =====
+  {type:"calcul", theme:"Automatismes maths - Dérivées", niveau:"1re", enonce:"Calcule la dérivée de la fonction f(x) = 3x² + 2x.", reponse:"f'(x) = 6x + 2."},
+  {type:"calcul", theme:"Automatismes maths - Dérivées", niveau:"Tle", enonce:"Calcule la dérivée de la fonction f(t) = 5t³ − 2t.", reponse:"f'(t) = 15t² − 2."},
+  {type:"calcul", theme:"Automatismes maths - Dérivées", niveau:"Tle", enonce:"Calcule la dérivée de la fonction f(x) = e^(2x).", reponse:"f'(x) = 2 × e^(2x)."},
+  {type:"calcul", theme:"Automatismes maths - Dérivées", niveau:"Tle", enonce:"Calcule la dérivée de la fonction x(t) = A × cos(ωt), où A et ω sont des constantes.", reponse:"x'(t) = −A × ω × sin(ωt)."},
+  {type:"calcul", theme:"Automatismes maths - Dérivées", niveau:"Tle", enonce:"La position d'un mobile est x(t) = 2t² + 3t. Calcule l'expression de sa vitesse v(t) = x'(t).", reponse:"v(t) = 4t + 3."},
+ 
+  // ===== Équations différentielles du 1er ordre =====
+  {type:"calcul", theme:"Automatismes maths - Équations différentielles", niveau:"Tle", enonce:"Donne la solution générale de l'équation différentielle dy/dt + y/τ = 0 (τ constante), avec y(0) = y0.", reponse:"y(t) = y0 × e^(−t/τ)."},
+  {type:"calcul", theme:"Automatismes maths - Équations différentielles", niveau:"Tle", enonce:"L'équation différentielle régissant la décroissance radioactive s'écrit dN/dt = −λN. Donne l'expression de N(t) en fonction de N0 et λ.", reponse:"N(t) = N0 × e^(−λt)."},
+  {type:"calcul", theme:"Automatismes maths - Équations différentielles", niveau:"Tle", enonce:"Pour la charge d'un condensateur dans un circuit RC, l'équation différentielle est RC × du/dt + u = E. Donne l'expression de u(t) sachant qu'à t=0, u=0.", reponse:"u(t) = E × (1 − e^(−t/RC))."},
+  {type:"calcul", theme:"Automatismes maths - Équations différentielles", niveau:"Tle", enonce:"Vérifie que y(t) = 5×e^(−2t) est solution de l'équation différentielle dy/dt + 2y = 0.", reponse:"dy/dt = −10×e^(−2t) ; alors dy/dt + 2y = −10×e^(−2t) + 10×e^(−2t) = 0, donc y(t) est bien solution."},
+  {type:"calcul", theme:"Automatismes maths - Équations différentielles", niveau:"Tle", enonce:"L'équation différentielle 2×dy/dt + y = 0 se met sous la forme τ×dy/dt + y = 0. Donne la valeur de la constante de temps τ.", reponse:"En divisant par 2 : dy/dt + y/2 = 0, donc τ = 2."}
+
 ];
 
 const MAX_PER_DAY = 5;
