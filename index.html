@@ -88,6 +88,26 @@ body{margin:0;background:var(--bg);color:var(--chalk);font-family:'Inter',sans-s
 .done-card{background:var(--bg-2);border-radius:12px;padding:1.6rem 1.4rem;text-align:center;}
 .done-card .big{font-size:30px;margin-bottom:8px;}
 .done-card p{margin:0 0 14px;color:var(--chalk-dim);font-size:14.5px;}
+
+.mode-toggle{display:flex;gap:8px;margin-bottom:12px;}
+.mode-toggle-btn{
+  flex:1;background:var(--bg-2);border:1.5px solid var(--line);color:var(--chalk-dim);
+  font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:13.5px;
+  padding:9px 8px;border-radius:9px;cursor:pointer;transition:all .15s ease;
+}
+.mode-toggle-btn.active{background:var(--teal);color:#0C2621;border-color:var(--teal);}
+textarea#textAnswer{
+  background:var(--bg-2);border:1px solid var(--line);color:var(--chalk);
+  border-radius:9px;padding:12px;font-size:14.5px;font-family:'Inter',sans-serif;
+  width:100%;min-height:90px;resize:vertical;
+}
+textarea#textAnswer:focus{outline:none;border-color:var(--teal-dim);}
+.auto-feedback{border-radius:12px;padding:1.1rem 1.2rem;margin-top:1rem;border-left:4px solid;}
+.auto-feedback.correct{background:var(--success-bg);border-color:var(--success);color:#1E4A31;}
+.auto-feedback.incorrect{background:#F6DEDA;border-color:#B7473A;color:#4A1D16;}
+.auto-feedback .af-status{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14.5px;margin-bottom:4px;}
+.auto-feedback .af-note{font-size:12.5px;opacity:0.8;margin:6px 0 0;}
+.your-answer{font-size:13.5px;color:var(--chalk-dim);margin:0 0 8px;}
 </style>
 </head>
 <body>
@@ -125,12 +145,24 @@ body{margin:0;background:var(--bg);color:var(--chalk);font-family:'Inter',sans-s
 
     <div class="section" style="margin:0 0 1.25rem;">
       <p class="label">Ta réponse</p>
-      <div class="photo-zone" id="photoZone">
-        <div class="icon">&#128247;</div>
-        <p>Prends en photo ta réponse manuscrite</p>
-        <input type="file" accept="image/*" capture="environment" id="photoInput" style="display:none">
+      <div class="mode-toggle">
+        <button class="mode-toggle-btn active" id="modePhotoBtn" data-mode="photo">&#128247; Photo</button>
+        <button class="mode-toggle-btn" id="modeClavierBtn" data-mode="clavier">&#9000; Clavier</button>
       </div>
-      <img id="thumb" class="thumb hidden">
+
+      <div id="photoInputArea">
+        <div class="photo-zone" id="photoZone">
+          <div class="icon">&#128247;</div>
+          <p>Prends en photo ta réponse manuscrite</p>
+          <input type="file" accept="image/*" capture="environment" id="photoInput" style="display:none">
+        </div>
+        <img id="thumb" class="thumb hidden">
+      </div>
+
+      <div id="textInputArea" class="hidden">
+        <textarea id="textAnswer" placeholder="Écris ta réponse ici..."></textarea>
+      </div>
+
       <button class="btn btn-primary" id="revealBtn" style="margin-top:14px;" disabled>Voir la correction</button>
     </div>
 
@@ -348,6 +380,58 @@ const photoZone = document.getElementById('photoZone');
 const photoInput = document.getElementById('photoInput');
 const thumb = document.getElementById('thumb');
 const revealBtn = document.getElementById('revealBtn');
+const photoInputArea = document.getElementById('photoInputArea');
+const textInputArea = document.getElementById('textInputArea');
+const modePhotoBtn = document.getElementById('modePhotoBtn');
+const modeClavierBtn = document.getElementById('modeClavierBtn');
+const textAnswer = document.getElementById('textAnswer');
+let answerMode = 'photo';
+
+modePhotoBtn.addEventListener('click', () => setAnswerMode('photo'));
+modeClavierBtn.addEventListener('click', () => setAnswerMode('clavier'));
+
+function setAnswerMode(mode){
+  answerMode = mode;
+  modePhotoBtn.classList.toggle('active', mode === 'photo');
+  modeClavierBtn.classList.toggle('active', mode === 'clavier');
+  photoInputArea.classList.toggle('hidden', mode !== 'photo');
+  textInputArea.classList.toggle('hidden', mode !== 'clavier');
+  updateRevealState();
+}
+
+function updateRevealState(){
+  if(answerMode === 'photo'){
+    revealBtn.disabled = !(thumb.src && !thumb.classList.contains('hidden'));
+  }else{
+    revealBtn.disabled = textAnswer.value.trim().length === 0;
+  }
+}
+textAnswer.addEventListener('input', updateRevealState);
+
+// Essaie d'extraire un nombre (décimal ou fraction du type "1/8") d'un texte donné.
+function parseNumberFromText(text){
+  if(!text) return null;
+  const fracMatch = text.match(/(-?\d+)\s*\/\s*(\d+)/);
+  if(fracMatch){
+    const den = parseFloat(fracMatch[2]);
+    if(den !== 0) return parseFloat(fracMatch[1]) / den;
+  }
+  const decMatch = text.match(/-?\d+(?:[.,]\d+)?/);
+  if(decMatch) return parseFloat(decMatch[0].replace(',', '.'));
+  return null;
+}
+
+// Cherche la valeur numérique attendue à partir du corrigé (après le dernier "=").
+function extractExpectedNumber(reponseText){
+  const lastEq = reponseText.lastIndexOf('=');
+  const snippet = lastEq >= 0 ? reponseText.slice(lastEq + 1) : reponseText;
+  return parseNumberFromText(snippet);
+}
+
+function isClose(a, b){
+  const tol = Math.max(0.01, Math.abs(b) * 0.02);
+  return Math.abs(a - b) <= tol;
+}
 
 function renderQuestion(){
   const q = todayQuestions[currentIndex];
@@ -355,6 +439,7 @@ function renderQuestion(){
   thumb.classList.add('hidden');
   thumb.src = '';
   photoInput.value = '';
+  textAnswer.value = '';
   revealBtn.disabled = true;
   revealBtn.textContent = 'Voir la correction';
   document.getElementById('correctionSection').classList.add('hidden');
@@ -367,19 +452,43 @@ photoInput.addEventListener('change', () => {
   if(photoInput.files && photoInput.files[0]){
     thumb.src = URL.createObjectURL(photoInput.files[0]);
     thumb.classList.remove('hidden');
-    revealBtn.disabled = false;
+    updateRevealState();
   }
 });
 
 revealBtn.addEventListener('click', () => {
   const q = todayQuestions[currentIndex];
   const isLast = currentIndex === todayQuestions.length - 1;
+  let blockHtml = '';
+
+  if(answerMode === 'clavier' && q.type === 'calcul'){
+    const expected = extractExpectedNumber(q.reponse);
+    const studentVal = parseNumberFromText(textAnswer.value);
+    if(expected !== null && studentVal !== null){
+      const correct = isClose(studentVal, expected);
+      blockHtml = `
+        <p class="your-answer">Ta réponse : « ${textAnswer.value.trim()} »</p>
+        <div class="auto-feedback ${correct ? 'correct' : 'incorrect'}">
+          <p class="af-status">${correct ? '&#10003; Correct' : '&#10005; À revoir'}</p>
+          <p>${q.reponse}</p>
+          <p class="af-note">Vérification automatique sur la valeur numérique — relis le corrigé complet ci-dessus pour t'assurer d'avoir bien tout justifié.</p>
+        </div>`;
+    }else{
+      blockHtml = `
+        <p class="your-answer">Ta réponse : « ${textAnswer.value.trim()} »</p>
+        <div class="correction-card"><p class="cc-label">Compare avec ta réponse</p><p>${q.reponse}</p></div>`;
+    }
+  }else if(answerMode === 'clavier'){
+    blockHtml = `
+      <p class="your-answer">Ta réponse : « ${textAnswer.value.trim()} »</p>
+      <div class="correction-card"><p class="cc-label">Compare avec ta réponse</p><p>${q.reponse}</p></div>`;
+  }else{
+    blockHtml = `<div class="correction-card"><p class="cc-label">Compare avec ta réponse</p><p>${q.reponse}</p></div>`;
+  }
+
   document.getElementById('correctionSection').innerHTML = `
     <p class="label">Corrigé</p>
-    <div class="correction-card">
-      <p class="cc-label">Compare avec ta réponse</p>
-      <p>${q.reponse}</p>
-    </div>
+    ${blockHtml}
     <button class="btn btn-primary" id="nextBtn" style="margin-top:12px;">${isLast ? 'Terminer' : 'Question suivante'}</button>
   `;
   document.getElementById('correctionSection').classList.remove('hidden');
