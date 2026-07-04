@@ -1,7 +1,7 @@
 {
   "name": "Atome[@home]",
   "short_name": "@[h]ome",
-  "start_url": "/ATOME/tle.html",
+  "start_url": "/ATOME/tle/tle.html",
   "scope": "/ATOME/tle/",
   "display": "standalone",
   "background_color": "#16242A",
