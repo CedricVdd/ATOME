@@ -298,31 +298,31 @@ const TEMPLATES_MENTAL = [
     const a = randInt(rand,1000,9999), b = randInt(rand,1000,9999);
     return {type:"calcul", theme:"Calcul mental", niveau:"Tle",
       enonce:`Calcule sans calculatrice : ${a} + ${b}`,
-      reponse:`${a} + ${b} = ${a+b}. Besoin d'une méthode ? Tutoriel du calcul mental : https://youtu.be/pDqAaOsG_Tc`};
+      reponse:`${a} + ${b} = ${a+b}. `};
   }},
   {theme:"Calcul mental", niveau:"Tle", build:(rand) => {
     const a = randInt(rand,5000,9999), b = randInt(rand,1000,a);
     return {type:"calcul", theme:"Calcul mental", niveau:"Tle",
       enonce:`Calcule sans calculatrice : ${a} − ${b}`,
-      reponse:`${a} − ${b} = ${a-b}. Besoin d'une méthode ? Tutoriel du calcul mental : https://youtu.be/pDqAaOsG_Tc`};
+      reponse:`${a} − ${b} = ${a-b}. `};
   }},
   {theme:"Calcul mental", niveau:"Tle", build:(rand) => {
     const a = randInt(rand,12,25), b = randInt(rand,11,25);
     return {type:"calcul", theme:"Calcul mental", niveau:"Tle",
       enonce:`Calcule sans calculatrice : ${a} × ${b}`,
-      reponse:`${a} × ${b} = ${a*b}. Besoin d'une méthode ? Tutoriel du calcul mental : https://youtu.be/pDqAaOsG_Tc`};
+      reponse:`${a} × ${b} = ${a*b}.`};
   }},
   {theme:"Calcul mental", niveau:"Tle", build:(rand) => {
     const q = randInt(rand,4,25), d = randInt(rand,4,25);
     return {type:"calcul", theme:"Calcul mental", niveau:"Tle",
       enonce:`Calcule sans calculatrice : ${q*d} ÷ ${d}`,
-      reponse:`${q*d} ÷ ${d} = ${q}. Besoin d'une méthode ? Tutoriel du calcul mental : https://youtu.be/pDqAaOsG_Tc`};
+      reponse:`${q*d} ÷ ${d} = ${q}.`};
   }},
   {theme:"Calcul mental", niveau:"Tle", build:(rand) => {
     const n = randInt(rand,20,50);
     return {type:"calcul", theme:"Calcul mental", niveau:"Tle",
-      enonce:`Calcule sans calculatrice : √${n*n}`,
-      reponse:`√${n*n} = ${n} (car ${n} × ${n} = ${n*n}). Besoin d'une méthode ? Tutoriel du calcul mental : https://youtu.be/pDqAaOsG_Tc`};
+      enonce:`Calcule sans calculatrice : √${n*n}. Besoin d'une méthode ? Tutoriel du calcul mental : https://youtu.be/pDqAaOsG_Tc`,
+      reponse:`√${n*n} = ${n} (car ${n} × ${n} = ${n*n}).`};
   }}
 ];
 
