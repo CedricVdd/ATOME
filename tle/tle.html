@@ -307,7 +307,7 @@ const TEMPLATES_MENTAL = [
       reponse:`${a} − ${b} = ${a-b}. `};
   }},
   {theme:"Calcul mental", niveau:"Tle", build:(rand) => {
-    const a = randInt(rand,12,25), b = randInt(rand,11,25);
+    const a = randInt(rand,12,3000), b = randInt(rand,11,25);
     return {type:"calcul", theme:"Calcul mental", niveau:"Tle",
       enonce:`Calcule sans calculatrice : ${a} × ${b}`,
       reponse:`${a} × ${b} = ${a*b}.`};
@@ -319,7 +319,7 @@ const TEMPLATES_MENTAL = [
       reponse:`${q*d} ÷ ${d} = ${q}.`};
   }},
   {theme:"Calcul mental", niveau:"Tle", build:(rand) => {
-    const n = randInt(rand,20,50);
+    const n = randInt(rand,20,3000);
     return {type:"calcul", theme:"Calcul mental", niveau:"Tle",
       enonce:`Calcule sans calculatrice : √${n*n}. Besoin d'une méthode ? Tutoriel du calcul mental : https://youtu.be/pDqAaOsG_Tc`,
       reponse:`√${n*n} = ${n} (car ${n} × ${n} = ${n*n}).`};
